@@ -1,0 +1,6 @@
+  <details id="details" ng-open="open" *ngFor="let categ of dataService.AllCategories">
+    <summary><span></span> {{categ.name}}</summary>
+    <ul>
+      <li *ngFor="let entry of categ.entries"><a href="view#" (click)="dataService.setEntry(entry)">{{entry.description}}</a></li>
+    </ul>
+  </details>

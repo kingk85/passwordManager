@@ -1,0 +1,7 @@
+
+<input type="text" name="search" class="form-control" placeholder="Search" [(ngModel)]="searchString" (keyup)="autoCompileUpdate()" [appHighlight]="highLightColor">
+<div>
+    <div *ngIf="visible" class="autocomplete-items" style="width:300px;">
+      <div *ngFor="let suggestion of suggestions" (click)="setInvisible(suggestion)"> {{suggestion.description}} </div>
+    </div>
+</div>

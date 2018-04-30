@@ -1,0 +1,8 @@
+This works for me: it will update local version to latest
+
+npm uninstall --save-dev angular-cli
+npm install --save-dev @angular/cli@latest
+npm install
+to verify version
+
+  ng --version

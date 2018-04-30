@@ -1,0 +1,5 @@
+<div>
+  <div *ngIf="visible" class="autocomplete-items" style="width:300px;">
+    <div *ngFor="let suggestion of suggestions" (click)="setInvisible(suggestion)"> {{suggestion}} </div>
+  </div>
+</div>
