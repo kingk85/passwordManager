@@ -1,1 +1,1 @@
-ng build --base-href /pwl/
+ng build --base-href /password-manager-online/

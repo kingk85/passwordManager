@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+
 import { LoginDataType } from '../../../dataTypes/login';
 import { LoginService }  from '../../../services/login.service';
 import { DataService }   from '../../../services/data.service';

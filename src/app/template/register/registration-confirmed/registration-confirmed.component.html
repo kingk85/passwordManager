@@ -1,0 +1,13 @@
+<div *ngIf="!userHasBeenActivated">
+  <p>
+    Completing the user registration, sending the code: {{code}} to the server.
+  </p>
+</div>
+
+<div *ngIf="userHasBeenActivated">
+    <p>
+      User activation success!.
+    </p>
+</div>
+
+<a routerLink="/" routerLinkActive="active">Go to the home page</a>

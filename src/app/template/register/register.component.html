@@ -1,0 +1,41 @@
+
+<div *ngIf="!formHasBeenSubmitted">
+  <h2>Registration</h2>
+  <h3><i>Fill the form to register</i></h3>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label class="center-block">Username:
+        <input class="form-control" formControlName="username" required>
+      </label>
+    </div>
+
+    <div formGroupName="passwords" class="well well-lg">
+      <div class="form-group">
+        <label class="center-block">Password:
+          <input type="password" class="form-control" formControlName="password" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="center-block">Password repeat:
+          <input type="password" class="form-control" formControlName="passwordRepeat" required>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="center-block">Email:
+        <input type="email" class="form-control" formControlName="email" required>
+      </label>
+    </div>      
+    <div class="form-group">
+        <input type="submit" value="Register">
+    </div>     
+  </form>
+</div>
+
+
+<div *ngIf="formHasBeenSubmitted">
+    <h2>Registration ok</h2>
+    <h3><i>Check your e-mail address for confirm</i></h3>
+</div>

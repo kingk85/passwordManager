@@ -20,7 +20,10 @@ export class DataService {
   private categoriesUrl  = 'services/dataService.php?action=loadData';
   //private categoriesUrl  = 'services/dataService.json';
   private saveEntryUrl   = 'services/dataService.php';
-  private deleteEntryUrl = 'services/dataService.php?action=removeEntry';
+
+  private activateUserUrl   = 'services/dataService.php?action=activateUser';
+  private createUserUrl     = 'services/dataService.php';
+  private deleteEntryUrl    = 'services/dataService.php?action=removeEntry';
 
   public AllCategories: PasswordManagerCategories[];
   public loggedUser: LoginDataType = new LoginDataType();
@@ -82,6 +85,25 @@ export class DataService {
       );
     }
   }
+
+
+  createUser( args ): Observable<String> 
+  {
+    args['action'] = "createUser";
+    return this.http.post(this.createUserUrl, args, { responseType: 'text' }).pipe(
+      retry(3), // retry a failed request up to 3 times
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
+  activateUser(code): Observable<String> 
+  {
+      return this.http.get(this.activateUserUrl+"&activation=" + code, {responseType: 'text'}).pipe(
+      retry(3), // retry a failed request up to 3 times
+      catchError(this.handleError) // then handle the error
+    );
+  }
+
 
   deleteEntry(): Observable<String> {
     var deleteUrlWithArgs = this.deleteEntryUrl;

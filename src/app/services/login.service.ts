@@ -13,11 +13,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse, HttpResponse} from '@angula
 export class LoginService {
 
   private loginUrl = 'services/login.php';
-  /*
-  "services/login.json",
-  "services/dataService.json"
-  */
-  //private loginUrl = 'services/login.json';
+  //private loginUrl = 'assets/simulation/login.json';
 
   private changePasswordUrl = 'services/dataService.php';
   public loggedUser:LoginDataType = new LoginDataType();

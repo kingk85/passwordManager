@@ -21,14 +21,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './template/page-not-found/page-not-found.component';
 import { SettingsComponent } from './template/settings/settings.component';
 import { PasswordViewerComponent } from './template/password-viewer/password-viewer.component';
+import { RegisterComponent } from './template/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegistrationConfirmedComponent } from './template/register/registration-confirmed/registration-confirmed.component';
+
 
 const appRoutes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'view', component: PasswordViewerComponent },
-  { path: '',
-    redirectTo: '/view',
-    pathMatch: 'full'
-  },
+  { path: 'register', component: RegisterComponent },
+  { path: 'activateAccount/:cod', component: RegistrationConfirmedComponent },
+  { path: '', redirectTo: '/view', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -46,7 +49,9 @@ const appRoutes: Routes = [
     SearchComponent,
     PageNotFoundComponent,
     SettingsComponent,
-    PasswordViewerComponent
+    PasswordViewerComponent,
+    RegisterComponent,
+    RegistrationConfirmedComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    ReactiveFormsModule
   ],
   providers: [DataService,
   LoginService],

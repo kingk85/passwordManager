@@ -12,3 +12,10 @@ export class LoginDataType {
         this.userIsLogged = false;
     }
 }
+
+export class UserDataType {
+    id = 0;
+    username = '';
+    password = '';
+    email = '';
+}

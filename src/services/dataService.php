@@ -46,6 +46,11 @@ switch ($httpMethod)
 
             for ($x = 0; $x< count($categoryDataEntry); $x++)
             {
+                if ($categoryDataEntry[$x]['description'] == "")
+                {
+                    $categoryDataEntry[$x]['description'] = "No description";
+                }
+                
                 $entries[] = $categoryDataEntry[$x];
             }
 
