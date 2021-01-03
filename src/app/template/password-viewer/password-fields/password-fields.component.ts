@@ -19,6 +19,7 @@ export class PasswordFieldsComponent implements OnInit {
     this.categoriesService.entry.description = "";
     this.categoriesService.entry.id = 0;
     this.categoriesService.entry.other = "";
+    this.categoriesService.entry.note = "";
     this.categoriesService.entry.password = "";
     this.categoriesService.entry.user_id = 0;
     this.categoriesService.entry.username = "";

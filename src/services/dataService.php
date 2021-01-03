@@ -11,7 +11,6 @@ if ($login->logged == false)
     die("Permissions denied.");
 }
 
-
 $post = json_decode(file_get_contents('php://input'), true);
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 
@@ -42,13 +41,18 @@ switch ($httpMethod)
 
             $db2 = new Database();
             $db2->use_cache = false;
-            $categoryDataEntry = $db2->get_all_values("select id, descrizione as description, categoria as category, username, password, altro as other, usr as user_id from pwl2_manager where usr = '$login->uid' and categoria = '".$data[$i]['categoria']."' order by descrizione ASC");
+            $categoryDataEntry = $db2->get_all_values("select id, descrizione as description, categoria as category, username, password, altro as other, usr as user_id, note from pwl2_manager where usr = '$login->uid' and categoria = '".$data[$i]['categoria']."' order by descrizione ASC");
 
             for ($x = 0; $x< count($categoryDataEntry); $x++)
             {
                 if ($categoryDataEntry[$x]['description'] == "")
                 {
                     $categoryDataEntry[$x]['description'] = "No description";
+                }
+
+                if ($categoryDataEntry[$x]['note'] == "")
+                {
+                    $categoryDataEntry[$x]['note'] = "No note";
                 }
                 
                 $entries[] = $categoryDataEntry[$x];
@@ -70,7 +74,7 @@ switch ($httpMethod)
         //echo "Method is post";
         if (isset($post['action']) && $post['action'] == "saveEntry" )
         {
-            $query = "insert into pwl2_manager (descrizione, categoria, password, username, altro, usr) VALUES ('".$post['description']."', '".$post['category']."', '".$post['password']."', '".$post['username']."', '".$post['other']."', '".$login->uid."')";
+            $query = "insert into pwl2_manager (descrizione, categoria, password, username, altro, note, usr) VALUES ('".$post['description']."', '".$post['category']."', '".$post['password']."', '".$post['username']."', '".$post['other']."', '".$post['note']."', '".$login->uid."')";
             $db = new Database();
             $db->Execute($query);
             die("Data saved");
@@ -84,7 +88,7 @@ switch ($httpMethod)
         //echo "Method is put";
         if (isset($post['action']) && $post['action'] == "saveEntry" )
         {
-            $query = "update pwl2_manager  SET descrizione = '".$post['description']."', categoria = '".$post['category']."', password = '".$post['password']."', username = '".$post['username']."', altro = '".$post['other']."' WHERE usr = '".$login->uid."' and id = '".$post['id']."'";
+            $query = "update pwl2_manager  SET descrizione = '".$post['description']."', categoria = '".$post['category']."', password = '".$post['password']."', username = '".$post['username']."', note = '".$post['note']."', altro = '".$post['other']."' WHERE usr = '".$login->uid."' and id = '".$post['id']."'";
             $db = new Database();
             $db->Execute($query);
             die("Data saved");
@@ -103,7 +107,7 @@ switch ($httpMethod)
                 $query = "";
                 for ($i = 0; $i < count($post['updatedEntries']); $i++)
                 {
-                    $query = "update pwl2_manager set username = '" . $post['updatedEntries'][$i]['username'] . "', password = '" . $post['updatedEntries'][$i]['password'] . "', altro = '" . $post['updatedEntries'][$i]['other'] . "' where id = '" . $post['updatedEntries'][$i]['id'] . "' and usr = $login->uid;";
+                    $query = "update pwl2_manager set username = '" . $post['updatedEntries'][$i]['username'] . "', password = '" . $post['updatedEntries'][$i]['password'] . "',            note = '" . $post['updatedEntries'][$i]['note'] . "', altro = '" . $post['updatedEntries'][$i]['other'] . "' where id = '" . $post['updatedEntries'][$i]['id'] . "' and usr = $login->uid;";
                     $db->Execute($query);
                 }
                
@@ -137,7 +141,7 @@ switch ($httpMethod)
             
             for ($i = 0; $i < count($post['backupEntries']); $i++)
             {
-                $query = "insert into pwl2_manager (username, password, altro, usr, descrizione, categoria) VALUES ('" . $post['backupEntries'][$i]['username'] . "', '" . $post['backupEntries'][$i]['password'] . "', '" . $post['backupEntries'][$i]['other'] . "', '$login->uid', '" . $post['backupEntries'][$i]['description'] . "', '" . $post['backupEntries'][$i]['category'] . "');";
+                $query = "insert into pwl2_manager (username, password, altro, usr, descrizione, categoria, note) VALUES ('" . $post['backupEntries'][$i]['username'] . "', '" . $post['backupEntries'][$i]['password'] . "', '" . $post['backupEntries'][$i]['other'] . "', '$login->uid', '" . $post['backupEntries'][$i]['description'] . "', '" . $post['backupEntries'][$i]['category'] . "', '" . $post['backupEntries'][$i]['note'] . "');";
                 $db->Execute($query);
                 //echo $query;
             }

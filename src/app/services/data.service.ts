@@ -16,7 +16,6 @@ export class DataService {
 
   public categoriesData: string;
   private crypt:Crypter = new Crypter();
-
   private categoriesUrl  = 'services/dataService.php?action=loadData';
   //private categoriesUrl  = 'services/dataService.json';
   private saveEntryUrl   = 'services/dataService.php';
@@ -36,6 +35,7 @@ export class DataService {
       password: "",
       username: "",
       other: "",
+      note: "",
       user_id: 0
     }
 
@@ -56,6 +56,7 @@ export class DataService {
     this.entry = Object.assign({}, theEntry);
     this.entry.password = this.crypt.X_DeCrypt_String(this.entry.password, this.loggedUser.password, true);
     this.entry.other = this.crypt.X_DeCrypt_String(this.entry.other, this.loggedUser.password, true);
+    this.entry.note = this.crypt.X_DeCrypt_String(this.entry.note, this.loggedUser.password, true);
     this.entry.username = this.crypt.X_DeCrypt_String(this.entry.username, this.loggedUser.password, true);
   }
 
@@ -68,6 +69,7 @@ export class DataService {
     args['action'] = "saveEntry";
     args.password = this.crypt.X_Crypt_String(args.password, this.loggedUser.password, true);
     args.other = this.crypt.X_Crypt_String(args.other, this.loggedUser.password, true);
+    args.note = this.crypt.X_Crypt_String(args.note, this.loggedUser.password, true);
     args.username = this.crypt.X_Crypt_String(args.username, this.loggedUser.password, true);
 
     if (args['id'] == 0)
@@ -120,7 +122,7 @@ export class DataService {
   else
     {
       alert("Nothing to remove.");   
-    } 
+    }
   }
 
 

@@ -5,6 +5,7 @@ export class PasswordManagerCategoriesEntry {
     password:string;
     username:string;
     other:string;
+    note:string;
     user_id:number;
 
     constructor()
@@ -15,6 +16,7 @@ export class PasswordManagerCategoriesEntry {
         this.password = '';
         this.username = '';
         this.other = '';
+        this.note = '';
         this.user_id = 0;
     }
 }
